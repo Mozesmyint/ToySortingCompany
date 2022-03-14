@@ -14,8 +14,6 @@ public class AppDriver {
 		
 		//calling manager class to run program
 		new ToyManager(); 
-		
-		
 			}
 		}
 

@@ -1,10 +1,6 @@
 package mru.tsc.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import mru.tsc.model.Toys;
 
 public class AppMenu {
 	

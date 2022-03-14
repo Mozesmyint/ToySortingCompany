@@ -15,7 +15,7 @@ import mru.tsc.view.AppMenu;
 
 public class ToyManager {
 	
-	String FILE_PATH = "res/toys.txt";
+	static String FILE_PATH = "res/toys.txt";
 	Scanner input;
 	ArrayList<Toys> tList;
 	AppMenu appMen;
@@ -230,12 +230,12 @@ public class ToyManager {
 		inputFile.close();
 	}
 	
-	public static void removeToy(ArrayList<Toys> tList, Scanner input) {
+	public static void removeToy(ArrayList<Toys> tList, Scanner input) throws IOException {
 		System.out.print("Enter the serial number of toy: ");
 		long SN = input.nextLong();
 		
 		//finding the array size and making the array smaller to compensate toy removal
-		for(int i = tList.size() - 1; i >= 0; i--) {
+		for(int i = 0; i < tList.size(); i++) {
 			final Toys t = tList.get(i);
 			if(t.getSerialNumber() == SN) {
 				System.out.println(tList.get(i));
@@ -246,7 +246,7 @@ public class ToyManager {
 				
 				if(choice == 'Y') {
 					System.out.println("Item Removed!");
-					tList.remove(i);
+					tList.remove(i--);
 				}			
 			}
 		}
@@ -261,7 +261,7 @@ public class ToyManager {
 		pw.close();
 	}
 	
-	public void searchToysBySN(ArrayList<Toys> tList, Scanner input) {
+	public void searchToysBySN(ArrayList<Toys> tList, Scanner input) throws IOException {
 		
 		boolean found = false;
 		
@@ -278,7 +278,9 @@ public class ToyManager {
 					if(choice == 'Y') {
 						t.setAvailable(t.getAvailable() - 1);
 						System.out.println("The toy " + t.getName() + " has been purchased");
-					}			
+					}	else {
+						Search();
+					}		
 					found = true;
 				} else {
 					System.out.println("Toy not available");
@@ -291,7 +293,7 @@ public class ToyManager {
 		}
 	}
 	
-	public void searchToysByName(ArrayList<Toys> tList, Scanner input) {
+	public void searchToysByName(ArrayList<Toys> tList, Scanner input) throws IOException {
 		
 		boolean found = false;
 		
@@ -307,6 +309,9 @@ public class ToyManager {
 					if(choice == 'Y') {
 						t.setAvailable(t.getAvailable() - 1);
 						System.out.println("The toy " + t.getName() + " has been purchased");
+
+					} else {
+						Search();
 					}			
 					found = true;
 				} else {
@@ -337,6 +342,8 @@ public class ToyManager {
 							if(choice == 'Y') {
 								t.setAvailable(t.getAvailable() - 1);
 								System.out.println("The toy " + t.getName() + " has been purchased");
+							} else {
+								Search();
 							}
 					 }
 				 }
@@ -355,6 +362,8 @@ public class ToyManager {
 							if(choice == 'Y') {
 								t.setAvailable(t.getAvailable() - 1);
 								System.out.println("The toy " + t.getName() + " has been purchased");
+							} else {
+								Search();
 							}
 					 }
 				 }
@@ -373,6 +382,8 @@ public class ToyManager {
 							if(choice == 'Y') {
 								t.setAvailable(t.getAvailable() - 1);
 								System.out.println("The toy " + t.getName() + " has been purchased");
+							} else {
+								Search();
 							}
 					 }
 				 }
@@ -391,6 +402,8 @@ public class ToyManager {
 							if(choice == 'Y') {
 								t.setAvailable(t.getAvailable() - 1);
 								System.out.println("The toy " + t.getName() + " has been purchased");
+							} else {
+								Search();
 							}
 					 }
 				 }
