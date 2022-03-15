@@ -326,7 +326,9 @@ public class ToyManager {
 	}
 	
 	public void searchToysByType(ArrayList<Toys> tList, Scanner input) throws IOException {		//making cases for each of the types of toys which then asks the toy specific variable
-		
+		ArrayList<String> tempSNList = new ArrayList<>();
+		ArrayList<Toys> tempToyList = new ArrayList<>();
+
 		int option = appMen.searchByTypeSubMenu();
 		switch (option) {
 		case 1:
@@ -334,17 +336,9 @@ public class ToyManager {
 			 char classification = appMen.figureSubMenu();
 			 for(Toys t : tList) {
 				 if (t instanceof Figures) {
-					 if(((Figures) t).getClassification() == classification){		//asking for figure specific variable
-						 System.out.println(t);
-						 char choice;
-							System.out.println("Would you like to purchase this toy (Y/N)? ");
-							choice = input.next().toUpperCase().charAt(0);
-							if(choice == 'Y') {
-								t.setAvailable(t.getAvailable() - 1);
-								System.out.println("The toy " + t.getName() + " has been purchased");
-							} else {
-								Search();
-							}
+					 if(((Figures) t).getClassification() == classification){ //asking for figure specific variable
+						 tempSNList.add(((Figures)t).getSerialNumber());
+						 tempToyList.add(t);
 					 }
 				 }
 			 }
@@ -355,16 +349,8 @@ public class ToyManager {
 			 for(Toys t : tList) {
 				 if (t instanceof Animals) {
 					 if(((Animals) t).getSize() == size){		//asking for animal specific variable
-						 System.out.println(t);
-						 char choice;
-							System.out.println("Would you like to purchase this toy (Y/N)? ");
-							choice = input.next().toUpperCase().charAt(0);
-							if(choice == 'Y') {
-								t.setAvailable(t.getAvailable() - 1);
-								System.out.println("The toy " + t.getName() + " has been purchased");
-							} else {
-								Search();
-							}
+						 tempSNList.add(((Animals)t).getSerialNumber());
+						 tempToyList.add(t);
 					 }
 				 }
 			 }
@@ -375,16 +361,8 @@ public class ToyManager {
 			 for(Toys t : tList) {
 				 if (t instanceof Puzzles) {
 					 if(((Puzzles) t).getPuzzleType() == type){		//asking for puzzle specific variable
-						 System.out.println(t);
-						 char choice;
-							System.out.println("Would you like to purchase this toy (Y/N)? ");
-							choice = input.next().toUpperCase().charAt(0);
-							if(choice == 'Y') {
-								t.setAvailable(t.getAvailable() - 1);
-								System.out.println("The toy " + t.getName() + " has been purchased");
-							} else {
-								Search();
-							}
+						 tempSNList.add(((Puzzles)t).getSerialNumber());
+						 tempToyList.add(t);
 					 }
 				 }
 			 }
@@ -395,20 +373,50 @@ public class ToyManager {
 			 for(Toys t : tList) {
 				 if (t instanceof BoardGames) {
 					 if(((BoardGames) t).getNumOfPlayers() == numOfPlayers){		//asking for board game specific variable
-						 System.out.println(t);
-						 char choice;
-							System.out.println("Would you like to purchase this toy (Y/N)? ");
-							choice = input.next().toUpperCase().charAt(0);
-							if(choice == 'Y') {
-								t.setAvailable(t.getAvailable() - 1);
-								System.out.println("The toy " + t.getName() + " has been purchased");
-							} else {
-								Search();
-							}
+						 tempSNList.add(((BoardGames)t).getSerialNumber());
+						 tempToyList.add(t);
 					 }
 				 }
 			 }
 			break;
 		}
+		
+		int a = 1;
+		for(Toys t : tempToyList) {
+			System.out.println(" (" + a + ") "  + t);
+			a++;
+		}
+		boolean purchase = false;
+		while (!purchase) {
+		System.out.println("Which toy would you like to purchase?");
+		int choice = input.nextInt();
+			for(Toys t : tList) {
+				if(t.getSerialNumber().equals(tempSNList.get(choice - 1))) {			//checking if user input matches something in the document which then displays the line
+					if(t.getAvailable() > 0) {
+						char choice1;
+						System.out.println("Chosen toy: " + t);
+						System.out.println("Would you like to purchase this toy (Y/N)? ");
+						choice1 = input.next().toUpperCase().charAt(0);
+						if(choice1 == 'Y') {
+							t.setAvailable(t.getAvailable() - 1);
+							System.out.println("The toy " + t.getName() + " has been purchased");
+							purchase = true;
+						} else {
+							Search();
+						}
+					} else {
+						System.out.println("This toy is out of stock!");
+					}
+					
+				}
+			}
+		
+		}
 	}
 }
+
+
+
+
+
+
