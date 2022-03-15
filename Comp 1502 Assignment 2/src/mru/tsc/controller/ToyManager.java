@@ -63,7 +63,7 @@ public class ToyManager {
 	
 	public void addToy(ArrayList<Toys> tList, Scanner input) {
 		//making variables to hold each of the values used in the text doc
-		long SN;
+		String SN;
 		String name;
 		String brand;
 		double price;
@@ -81,7 +81,7 @@ public class ToyManager {
 			char classification;
 			
 			System.out.println("Enter Serial Number:");
-			SN = input.nextLong();
+			SN = input.next();
 			System.out.println("Enter Toy Name:");
 			name = input.next();
 			System.out.println("Enter Toy Brand:");
@@ -103,7 +103,7 @@ public class ToyManager {
 			char size;
 			
 			System.out.println("Enter Serial Number:");
-			SN = input.nextLong();
+			SN = input.next();
 			System.out.println("Enter Toy Name:");
 			name = input.next();
 			System.out.println("Enter Toy Brand:");
@@ -126,7 +126,7 @@ public class ToyManager {
 			char type;
 			
 			System.out.println("Enter Serial Number:");
-			SN = input.nextLong();
+			SN = input.next();
 			System.out.println("Enter Toy Name:");
 			name = input.next();
 			System.out.println("Enter Toy Brand:");
@@ -150,7 +150,7 @@ public class ToyManager {
 			String designer;
 			
 			System.out.println("Enter Serial Number:");
-			SN = input.nextLong();
+			SN = input.next();
 			System.out.println("Enter Toy Name:");
 			name = input.next();
 			System.out.println("Enter Toy Brand:");
@@ -206,23 +206,23 @@ public class ToyManager {
 			String str = inputFile.nextLine();
 			String[] temp = str.split(";");
 			
-			long SN = Long.parseLong(temp[0]);
-			int firstSN = Integer.parseInt(String.valueOf(temp[0].charAt(0)));
+			String SN = temp[0];
+			char firstSN = temp[0].charAt(0);
 			
 			//reading the first number of the serial number which then sorts the items to the other classes
-			if((firstSN == 0) || (firstSN == 1)) {
+			if((firstSN == '0') || (firstSN == '1')) {
 				Toys toyTemp = new Figures(SN, temp[1], temp[2], Double.parseDouble(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), (temp[6].charAt(0)));
 				tList.add(toyTemp);
 			}
-			if((firstSN == 2) || (firstSN == 3)) {
+			if((firstSN == '2') || (firstSN == '3')) {
 				Toys toyTemp = new Animals(SN, temp[1], temp[2], Double.parseDouble(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), temp[6], (temp[7].charAt(0)));
 				tList.add(toyTemp);
 			}
-			if((firstSN == 4) || (firstSN == 5) || (firstSN == 6)) {
+			if((firstSN == '4') || (firstSN == '5') || (firstSN == '6')) {
 				Toys toyTemp = new Puzzles(SN, temp[1], temp[2], Double.parseDouble(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]),(temp[6].charAt(0)));
 				tList.add(toyTemp);
 			}
-			if((firstSN == 7) || (firstSN == 8) || (firstSN == 9)) {
+			if((firstSN == '7') || (firstSN == '8') || (firstSN == '9')) {
 				Toys toyTemp = new BoardGames(SN, temp[1], temp[2], Double.parseDouble(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), temp[6], temp[7]);
 				tList.add(toyTemp);
 			}
@@ -232,12 +232,12 @@ public class ToyManager {
 	
 	public static void removeToy(ArrayList<Toys> tList, Scanner input) throws IOException {
 		System.out.print("Enter the serial number of toy: ");
-		long SN = input.nextLong();
+		String SN = input.next();
 		
 		//finding the array size and making the array smaller to compensate toy removal
 		for(int i = 0; i < tList.size(); i++) {
 			final Toys t = tList.get(i);
-			if(t.getSerialNumber() == SN) {
+			if(t.getSerialNumber().equals(SN)) {
 				System.out.println(tList.get(i));
 				
 				char choice;
@@ -266,9 +266,9 @@ public class ToyManager {
 		boolean found = false;
 		
 		System.out.println("Enter a serial number to search for: ");
-		long search = input.nextLong();
+		String search = input.next();
 		for(Toys t : tList) {
-			if(t.getSerialNumber() == search) {			//checking if user input matches something in the document which then displays the line
+			if(t.getSerialNumber().equals(search)) {			//checking if user input matches something in the document which then displays the line
 				if(t.getAvailable() > 0) {
 					System.out.println(t);
 					char choice;
@@ -288,8 +288,8 @@ public class ToyManager {
 				}
 			}
 		}
-		if(!found || Long.toString(search).length()!= 10) { 		//if the serial number is too long then error trap
-			System.out.println("Incorrect Serial Number");
+		if(!found || (search).length()!= 10) { 		//if the serial number is too long then error trap
+			System.out.println("Incorrect/Not Valid Serial Number");
 		}
 	}
 	

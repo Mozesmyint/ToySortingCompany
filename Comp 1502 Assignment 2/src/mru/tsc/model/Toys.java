@@ -2,14 +2,14 @@ package mru.tsc.model;
 
 public abstract class Toys {
 
-	public long serialNumber;
+	public String serialNumber;
 	public String name;
 	public String brand;
 	public double price;
 	public int available;
 	public int ageAppropriate;
 
-	public Toys(long SN, String name, String brand, double price, int available, int ageAppropriate) {
+	public Toys(String SN, String name, String brand, double price, int available, int ageAppropriate) {
 		this.serialNumber = SN;
 		this.name = name;
 		this.brand = brand;
@@ -18,11 +18,11 @@ public abstract class Toys {
 		this.ageAppropriate = ageAppropriate;
 	}
 
-	public long getSerialNumber() {
+	public String getSerialNumber() {
 		return serialNumber;
 	}
 
-	public void setSerialNumber(long serialNumber) {
+	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 

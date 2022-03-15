@@ -1,6 +1,5 @@
 package mru.tsc.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;

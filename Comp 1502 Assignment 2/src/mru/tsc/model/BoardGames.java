@@ -5,7 +5,7 @@ public class BoardGames extends Toys{
 	public String numOfPlayers;
 	public String designer;
 
-	public BoardGames(long SN, String name, String brand, double price, int available, int ageAppropriate, String numOfPlayers, String designer) {
+	public BoardGames(String SN, String name, String brand, double price, int available, int ageAppropriate, String numOfPlayers, String designer) {
 		super(SN, name, brand, price, available, ageAppropriate);
 		this.numOfPlayers = numOfPlayers;
 		this.designer = designer;
